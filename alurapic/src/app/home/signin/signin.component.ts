@@ -14,7 +14,7 @@ export class SinginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private route: Router,
-    private platFormDetectorService: PlatFormDetetorService
+    private platformDetectorService: PlatFormDetetorService
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +23,11 @@ export class SinginComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
+  ngAfterViewInit() {
+    this.platformDetectorService.isPlatformBrowser() &&
+      this.userNameInput.nativeElement.focus();
+  }
+
   login() {
     const userName = this.loginForm.get('userName')?.value;
     const password = this.loginForm.get('password')?.value;
@@ -33,7 +38,7 @@ export class SinginComponent implements OnInit {
       (err) => {
         console.log(err);
         this.loginForm.reset();
-        this.platFormDetectorService.isPlatformBrowser() &&
+        this.platformDetectorService.isPlatformBrowser() &&
           this.userNameInput.nativeElement.focus();
       }
     );
