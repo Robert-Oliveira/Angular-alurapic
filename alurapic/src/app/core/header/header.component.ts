@@ -9,10 +9,13 @@ import { User } from '../user/user';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  user$: Observable<User | null>;
+  user$: Observable<User>;
+  user: User;
 
   constructor(private userService: UserService, private router: Router) {
     this.user$ = userService.getUser();
+    this.user$.subscribe((user) => (this.user = user));
+    console.log(this.user$);
   }
 
   logout() {

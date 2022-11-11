@@ -32,15 +32,15 @@ export class SinginComponent implements OnInit {
     const userName = this.loginForm.get('userName')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    this.authService.authenticate(userName, password).subscribe(
-      () => this.route.navigate(['user', userName]),
-
-      (err) => {
-        console.log(err);
+    this.authService.authenticate(userName, password).subscribe({
+      next: () => {
+        this.route.navigate(['user', userName]);
+      },
+      error: () => {
         this.loginForm.reset();
         this.platformDetectorService.isPlatformBrowser() &&
           this.userNameInput.nativeElement.focus();
-      }
-    );
+      },
+    });
   }
 }
