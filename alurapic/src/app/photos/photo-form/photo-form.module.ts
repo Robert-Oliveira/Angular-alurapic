@@ -1,7 +1,7 @@
-import { immediateClickModule } from './../../shared/immediate-click/immediate-click-module';
+import { immediateClickModule } from '../../shared/directives/immediate-click/immediate-click-module';
 import { PhotoModule } from './../photo/photo.module';
 import { RouterModule } from '@angular/router';
-import { VmessageModule } from './../../shared/components/card/vmessage/vmessagem.module';
+import { VmessageModule } from '../../shared/components/vmessage/vmessagem.module';
 import { PhotoFormComponent } from './photo-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

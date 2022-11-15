@@ -20,8 +20,13 @@ export class PhotoListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userName = this.activatedRoute.snapshot.params['userName'];
-    this.photos = this.activatedRoute.snapshot.data['photos'];
+    //Dessa maneira, ainda que nosso componente seja carregado uma única vez enquanto
+    //troca de rotas, quando isso ocorrer o parâmetro da rota será coletado,
+    //lançado para o userName então os dados serão colhidos.
+    this.activatedRoute.params.subscribe((params) => {
+      this.userName = params['userName'];
+      this.photos = this.activatedRoute.snapshot.data['photos'];
+    });
   }
 
   // metodo para pegar as fotos que vieram da api e adiona a lista, se não veio dados hasMore vira falso e oculta o botão

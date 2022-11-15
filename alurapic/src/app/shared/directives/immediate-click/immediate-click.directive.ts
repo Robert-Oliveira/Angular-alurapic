@@ -1,4 +1,4 @@
-import { PlatFormDetetorService } from './../../core/plataform-detector/platform-detector.service';
+import { PlatFormDetetorService } from '../../../core/plataform-detector/platform-detector.service';
 import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
