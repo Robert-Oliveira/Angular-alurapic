@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 import { Photo } from '../photos.model';
 import { of, throwError } from 'rxjs';
 
-const API = 'http://localhost:3000';
+import { environment } from 'src/environments/environment';
+
+const API = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {

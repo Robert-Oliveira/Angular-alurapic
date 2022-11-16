@@ -1,19 +1,20 @@
 import { NewUser } from './new-user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-const API_URL = 'http://localhost:3000';
+const API = environment.apiUrl;
 @Injectable()
 export class SignUpService {
   constructor(private httpClient: HttpClient) {}
 
   // serviço para buscar o userName no banco
   checkUserNameTaken(userName: string) {
-    return this.httpClient.get(API_URL + '/user/exists/' + userName);
+    return this.httpClient.get(API + '/user/exists/' + userName);
   }
 
   // serviço para salvar os dados do cadastro
   signup(newUser: NewUser) {
-    return this.httpClient.post(API_URL + '/user/signup', newUser);
+    return this.httpClient.post(API + '/user/signup', newUser);
   }
 }
