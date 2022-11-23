@@ -1,3 +1,4 @@
+import { LoadingModule } from './../shared/components/loading/loading.module';
 import { AlertModule } from './../shared/components/alert/alert.module';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   exports: [HeaderComponent, FooterComponent],
-  imports: [CommonModule, RouterModule, AlertModule],
+  imports: [CommonModule, RouterModule, AlertModule, LoadingModule],
   // indicar ao Angular que a implementação do interceptador que será utilizada é a nossa
   providers: [
     {

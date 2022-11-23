@@ -13,8 +13,12 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     //rotas filha
     children: [
-      { path: '', component: SinginComponent },
-      { path: 'signup', component: SignUpComponent },
+      { path: '', component: SinginComponent, data: { title: 'Sign in' } },
+      {
+        path: 'signup',
+        component: SignUpComponent,
+        data: { title: 'Sign up' },
+      },
     ],
   },
 ];

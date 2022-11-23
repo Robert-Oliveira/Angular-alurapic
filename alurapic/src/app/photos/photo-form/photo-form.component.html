@@ -55,6 +55,7 @@
         </label>
       </div>
 
+      <div *ngIf="!percentDone; else percent"></div>
       <button
         [disabled]="photoForm.invalid"
         type="submit"
@@ -63,7 +64,10 @@
         Upload
       </button>
 
-      <a class="btn btn-secondary btn-block">Cancel</a>
+      <a [routerLink]="['']" class="btn btn-secondary btn-block">Cancel</a>
     </div>
+    <ng-template #percent>
+      <div class="text-center display-4">uploading {{ percentDone }}%</div>
+    </ng-template>
   </form>
 </div>
