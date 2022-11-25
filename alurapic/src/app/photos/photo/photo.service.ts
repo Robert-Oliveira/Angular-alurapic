@@ -21,7 +21,9 @@ export class PhotoService {
   // serviço para paginar as fotos da api
   listFromUserPaginated(userName: string, page: number) {
     const params = new HttpParams().append('page', page.toString());
-    return this.http.get<Photo[]>(API + '/' + userName + '/photos', { params });
+    return this.http.get<Photo[]>(API + '/' + userName + '/photos', {
+      params,
+    });
   }
 
   upload(description: string, allowComments: boolean, file: File) {

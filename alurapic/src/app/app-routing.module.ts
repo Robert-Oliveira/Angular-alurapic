@@ -1,3 +1,4 @@
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
 import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
@@ -36,6 +37,11 @@ const routes: Routes = [
     path: 'p/:photoId',
     component: PhotoDetailsComponent,
     data: { title: 'Photo detail' },
+  },
+  {
+    path: 'error',
+    component: GlobalErrorComponent,
+    data: { title: 'Error' },
   },
   {
     path: 'not-found',
