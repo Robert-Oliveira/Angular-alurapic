@@ -34,7 +34,13 @@ export class PhotoDetailsComponent implements OnInit {
     this.photoService.removePhoto(this.photoId).subscribe(
       () => {
         this.alertService.sucess('Photo removed', true);
-        this.router.navigate(['/user', this.userService.getUserName()]);
+        this.router.navigate(
+          ['/user', this.userService.getUserName()],
+          // replaceUrl vai apagar a rota de um item que foi excluido da api
+          {
+            replaceUrl: true,
+          }
+        );
       },
       (err) => {
         console.log(err);

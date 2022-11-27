@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case-validators';
 import { NewUser } from './new-user';
+import { userNamePassword } from './username-password.validator';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -24,37 +25,42 @@ export class SignUpComponent implements OnInit {
     private platFormDetetorService: PlatFormDetetorService
   ) {}
   ngOnInit(): void {
-    this.signupForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      fullName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(40),
+    this.signupForm = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        fullName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(40),
+          ],
         ],
-      ],
 
-      userName: [
-        '',
-        [
-          Validators.required,
-          lowerCaseValidator,
-          // Validators.pattern(/^[a-z0-9_\-]+$/),
-          Validators.minLength(2),
-          Validators.maxLength(30),
+        userName: [
+          '',
+          [
+            Validators.required,
+            lowerCaseValidator,
+            // Validators.pattern(/^[a-z0-9_\-]+$/),
+            Validators.minLength(2),
+            Validators.maxLength(30),
+          ],
+          this.UserNotTakenValidatorService.checkUserNameTaken(),
         ],
-        this.UserNotTakenValidatorService.checkUserNameTaken(),
-      ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(14),
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(14),
+          ],
         ],
-      ],
-    });
+      },
+      {
+        validator: userNamePassword,
+      }
+    );
   }
   //deixar o primeiro campo de formulario em destaque sempre que a pagina carregar
   ngAfterViewInit() {
@@ -64,11 +70,13 @@ export class SignUpComponent implements OnInit {
 
   //função para salvar os dados do cadastro e redireciona para pagina de login
   signup() {
-    //getRawValue() dá um objeto javascript com os valores preenchidos no formulario
-    const newUser = this.signupForm.getRawValue() as NewUser;
-    this.signUpService.signup(newUser).subscribe(
-      () => this.router.navigate(['']),
-      (err) => console.log(err)
-    );
+    if (this.signupForm.valid && !this.signupForm.pending) {
+      //getRawValue() dá um objeto javascript com os valores preenchidos no formulario
+      const newUser = this.signupForm.getRawValue() as NewUser;
+      this.signUpService.signup(newUser).subscribe(
+        () => this.router.navigate(['']),
+        (err) => console.log(err)
+      );
+    }
   }
 }
